@@ -1,19 +1,20 @@
 
-
 var time = questions.length * 10;
 var timer;
 
 var qIndex = 0;
-
+var score = 0;
 var startButton = document.getElementById("start-btn");
 var timeSpn = document.getElementById("time");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("choices");
 function startQuiz() {
-    timeSpn = time;
+
+    document.querySelector("#start-btn").hidden = true;
     timer = setInterval(function () {
         time--;
-        if (time === 0) {
+        timeSpn.textContent = time;
+        if (time <= 0) {
             endQuiz();
         }
     }, 1000);
@@ -22,8 +23,10 @@ function startQuiz() {
 
 startButton.onclick = startQuiz;
 function endQuiz() {
-    clearInterval(timer);
 
+    clearInterval(timer);
+    alert("Time is up!");
+    showScores();
 }
 
 function showQuestion() {
@@ -44,6 +47,7 @@ function showQuestion() {
 function questionClick(event) {
     if (qIndex >= questions.length) {
         //do something good
+        endQuiz();
     } else {
         //do something bad
 
@@ -52,10 +56,14 @@ function questionClick(event) {
         if (questionClick.toLowerCase() === currentQuestion.answer.toLowerCase()) {
             alert("you're correct!");
 
+            score++;
+
         } else {
             alert("Incorrect");
             time -= 5;
         }
+
+
         qIndex++;
         showQuestion();
     }
@@ -63,4 +71,11 @@ function questionClick(event) {
 
 function currentQuestion() {
     showQuestion();
+    console.log(questions.length);
 }
+
+function showScores() {
+    questionEl.textContent = "Finished!";
+    choicesEl.textContent = "Total Points: " + score;
+}
+
