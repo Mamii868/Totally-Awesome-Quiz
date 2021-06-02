@@ -14,13 +14,15 @@ var initials = document.getElementById("initials");
 var submitButton = document.getElementById("submit");
 var mostRecentScore = localStorage.getItem("mostRecentScore");
 var highScoreTitle = document.getElementById("highScoreTitle");
+var highScoreList = document.getElementById("highScoreList")
 
 highScoreList.hidden = false;
 highScoreTitle.hidden = false;
 
 
 function startQuiz() {
-
+    highScoreTitle.hidden = true;
+    highScoreList.hidden = true;
     startButton.hidden = true;
     timer = setInterval(function () {
         time--;
@@ -86,6 +88,9 @@ function showScores() {
     questionEl.textContent = "Finished!";
     choicesEl.textContent = "Total Points: " + score;
     initialForm.hidden = false;
+    highScoreList.hidden = false;
+    highScoreTitle.hidden = false;
+
 
 
 }
@@ -95,7 +100,7 @@ var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 var maxScores = 5
 function saveScore(event) {
     var scores = {
-        score: Math.floor(Math.random() * 100),
+        score: score,
         name: initials.value
     };
     event.preventDefault();
@@ -113,7 +118,10 @@ function saveScore(event) {
 
     localStorage.setItem("highScores", JSON.stringify(highScores));
 
-}
+};
 submitButton.onclick = saveScore;
+highScoreList.innerHTML = highScores.map(function (scores) {
+    return (`<li class= "high-score">${scores.name}-${scores.score}</li>`)
+}).join("");
 
 
