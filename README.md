@@ -6,5 +6,5 @@ If the answer is either correct or incorrect a message pops up telling the perso
 Once the test is complete, users are able to put their initials along with their score in a list of high scores stored in their local storage.
 
 Screenshots:
-![Screenshot](Screenshot-1.jpg)
-![Screenshot](Screenshot-2.jpg)
+![Screenshot](assets/images/Screenshot-1.jpg)
+![Screenshot](assets/images/Screenshot-2.jpg)
