@@ -1,4 +1,5 @@
 
+
 var time = questions.length * 10;
 var timer;
 
@@ -9,6 +10,7 @@ var timeSpn = document.getElementById("time");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("choices");
 function startQuiz() {
+    timeSpn = time;
     timer = setInterval(function () {
         time--;
         if (time === 0) {
@@ -48,13 +50,17 @@ function questionClick(event) {
         var currentQuestion = questions[qIndex];
         var questionClick = event.target.textContent;
         if (questionClick.toLowerCase() === currentQuestion.answer.toLowerCase()) {
-            console.log("yo're correct!");
+            alert("you're correct!");
 
         } else {
-            console.log("Incorrect");
+            alert("Incorrect");
             time -= 5;
         }
         qIndex++;
         showQuestion();
     }
+}
+
+function currentQuestion() {
+    showQuestion();
 }
