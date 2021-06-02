@@ -80,3 +80,11 @@ font-size: large;
  margin: auto;
  margin-top: 10px;
 }
+
+.scoreSheet {
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-top: 10%;
+    color: #F7F7F7;
+}

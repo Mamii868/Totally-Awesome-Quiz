@@ -19,9 +19,14 @@
         <div id="choices"></div>
     </div>
     <form id="initialForm" hidden>
-        <input type=text id=initials placeholder="initials">
-        <button type=submit class=button id=submit>Submit</button>
+        <input type=text name="initials" id="initials" placeholder="initials">
+        <button type=submit class=button id=submit onclick="saveScore(event)">Submit</button>
     </form>
+    <scores class=scoreSheet>
+        <h1 id=highScoreTitle hidden>High Scores</h1>
+        <ul id=highScoreList hidden></ul>
+
+    </scores>
 </body>
 <script src="./assets/questions.js"></script>
 <script src="./assets/script.js"></script>

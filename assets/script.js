@@ -2,6 +2,7 @@
 var time = questions.length * 10;
 var timer;
 
+
 var qIndex = 0;
 var score = 0;
 var startButton = document.getElementById("start-btn");
@@ -9,7 +10,15 @@ var timeSpn = document.getElementById("time");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("choices");
 var initialForm = document.getElementById("initialForm");
+var initials = document.getElementById("initials");
 var submitButton = document.getElementById("submit");
+var mostRecentScore = localStorage.getItem("mostRecentScore");
+var highScoreTitle = document.getElementById("highScoreTitle");
+
+highScoreList.hidden = false;
+highScoreTitle.hidden = false;
+
+
 function startQuiz() {
 
     startButton.hidden = true;
@@ -46,7 +55,7 @@ function showQuestion() {
 };
 
 function questionClick(event) {
-    if (qIndex >= questions.length) {
+    if (qIndex >= questions.length || time == 0) {
         endQuiz();
     } else {
 
@@ -61,7 +70,7 @@ function questionClick(event) {
             alert("Incorrect");
             time -= 5;
         }
-
+        localStorage.setItem("mostRecentScore", score);
 
         qIndex++;
         showQuestion();
@@ -78,10 +87,33 @@ function showScores() {
     choicesEl.textContent = "Total Points: " + score;
     initialForm.hidden = false;
 
+
 }
 
-function saveScore() {
-    console.log("clicked submit")
-}
+//Local Storage
+var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+var maxScores = 5
+function saveScore(event) {
+    var scores = {
+        score: Math.floor(Math.random() * 100),
+        name: initials.value
+    };
+    event.preventDefault();
 
+
+    highScores.push(scores);
+
+    highScores.sort(function (a, b) {
+        return b.scores - a.scores;
+    });
+
+    highScores.splice(5);
+
+
+
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+
+}
 submitButton.onclick = saveScore;
+
+
