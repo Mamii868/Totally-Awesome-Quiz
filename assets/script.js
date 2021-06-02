@@ -8,9 +8,11 @@ var startButton = document.getElementById("start-btn");
 var timeSpn = document.getElementById("time");
 var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("choices");
+var initialForm = document.getElementById("initialForm");
+var submitButton = document.getElementById("submit");
 function startQuiz() {
 
-    document.querySelector("#start-btn").hidden = true;
+    startButton.hidden = true;
     timer = setInterval(function () {
         time--;
         timeSpn.textContent = time;
@@ -40,16 +42,13 @@ function showQuestion() {
         newButton.textContent = choice;
         choicesEl.appendChild(newButton);
         newButton.onclick = questionClick;
-
     }
 };
 
 function questionClick(event) {
     if (qIndex >= questions.length) {
-        //do something good
         endQuiz();
     } else {
-        //do something bad
 
         var currentQuestion = questions[qIndex];
         var questionClick = event.target.textContent;
@@ -77,5 +76,12 @@ function currentQuestion() {
 function showScores() {
     questionEl.textContent = "Finished!";
     choicesEl.textContent = "Total Points: " + score;
+    initialForm.hidden = false;
+
 }
 
+function saveScore() {
+    console.log("clicked submit")
+}
+
+submitButton.onclick = saveScore;
